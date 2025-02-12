@@ -1,0 +1,41 @@
+node 1
+Public address of the key:   0xe68374f3331965e2B7BEFef01a06F7358c61d628
+Path of the secret key file: data/keystore/UTC--2025-02-06T17-15-39.905933000Z--c7b79bc246c269a7c3cb0253f5d26a43ca78a589
+123456789
+"enode://58aba5f8c8c9be8a11ee5900c63a27432ece92a65bdb8ac3fb57437dce831962fa88b068a69059b3324ff559b71112ddb5dabf60749b3d3c06e8b04275c288cc@21.45.196.9:30303"
+geth --datadir "./data" --networkid 12345 --port 30303 --http --http.port 8545 --authrpc.port 8552 --bootnodes "enode://58aba5f8c8c9be8a11ee5900c63a27432ece92a65bdb8ac3fb57437dce831962fa88b068a69059b3324ff559b71112ddb5dabf60749b3d3c06e8b04275c288cc@21.45.196.9:30303" console
+
+
+geth --networkid 12345 --nodiscover --http --http.addr "0.0.0.0" --http.port 8545 --http.api personal,eth,net,web3 --http.corsdomain "*" --allow-insecure-unlock --unlock "0xC7b79Bc246C269A7c3cb0253f5D26a43ca78a589" --password /password.txt --mine
+web3.eth.getBalance("0xc7b79bc246c269a7c3cb0253f5d26a43ca78a589")
+geth --unlock "0xC7b79Bc246C269A7c3cb0253f5D26a43ca78a589" --password ./password.txt --mine
+
+
+node 2
+Public address of the key:   0xA3384249F7366C48cb057db9d5eFAd47ecDE0Fc7
+Path of the secret key file: data/keystore/UTC--2025-02-06T17-26-05.055898000Z--f8217e93bc6946e829bedfe7732935168ccd6eeb
+987654321
+
+geth --networkid 12345 --nodiscover --http --http.addr "0.0.0.0" --http.port 8546 --http.api personal,eth,net,web3 --http.corsdomain "*" --allow-insecure-unlock --unlock "0xC7b79Bc246C269A7c3cb0253f5D26a43ca78a589" --password /password.txt --mine
+geth --datadir "./data" --networkid 12345 --port 30304 --http --http.port 8546 --authrpc.port 8553 --bootnodes "enode://58aba5f8c8c9be8a11ee5900c63a27432ece92a65bdb8ac3fb57437dce831962fa88b068a69059b3324ff559b71112ddb5dabf60749b3d3c06e8b04275c288cc@21.45.196.9:30303" console
+geth --networkid 1337 --datadir ./node2/data --http --http.corsdomain "*" --http.port 8546 --port 30304 --authrpc.port 8552 --unlock "0x534E6D906574A61E4f1DCC066db6303211C3236C" --password 987654321 console
+
+
+geth --datadir "./data" --networkid 12345 --port 30304 --http --http.port 8546 --authrpc.port 8552 --bootnodes "enode://58aba5f8c8c9be8a11ee5900c63a27432ece92a65bdb8ac3fb57437dce831962fa88b068a69059b3324ff559b71112ddb5dabf60749b3d3c06e8b04275c288cc@21.45.196.9:30303" console
+"enode://a74c6aaf23195e9bc765541dc61aa5fe1e6bdd78a08d687154bc117cbdb2a0a5bb982077bfa05441ad73038296f6eb0433c5f22b508027a1c847214ec0c72946@21.45.196.9:30304"
+
+
+personal.unlockAccount("0xC7b79Bc246C269A7c3cb0253f5D26a43ca78a589", "123456789", 600)
+eth.getBalance("0xe68374f3331965e2b7befef01a06f7358c61d628")
+eth.getBalance("0xa3384249f7366c48cb057db9d5efad47ecde0fc7")
+web3.eth.getBalance("0xa3384249f7366c48cb057db9d5efad47ecde0fc7").then(console.log)
+
+
+personal.unlockAccount("0xc7b79bc246c269a7c3cb0253f5d26a43ca78a589", "123456789", 600)
+
+% geth --datadir "./data" --networkid 12345 --port 30304 --http --http.port 8545 --authrpc.port 8552 --bootnodes "enode://58aba5f8c8c9be8a11ee5900c63a27432ece92a65bdb8ac3fb57437dce831962fa88b068a69059b3324ff559b71112ddb5dabf60749b3d3c06e8b04275c288cc@21.45.196.9:30303" console
+
+
+=================================================================================
+truffle console --network development
+web3.eth.getBlock("latest").then(console.log)

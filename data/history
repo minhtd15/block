@@ -1,0 +1,7 @@
+eth.accounts
+geth account new
+eth.accounts
+admin.peers
+\
+admin.peers
+eth.accounts
